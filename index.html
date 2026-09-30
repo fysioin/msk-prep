@@ -20,7 +20,7 @@
   --blue:#34558b; --gold:#6e5617;
   --hl:#f6e8cf; --hl-pink:#f6e8cf; --hl-blue:#eee6d4; --hl-green:#e9e4d3;
   --shadow:0 1px 2px rgba(60,50,30,.08),0 3px 10px rgba(60,50,30,.07);
-  --font-read:Charter,'Iowan Old Style','Palatino Linotype','Book Antiqua',Palatino,Georgia,serif;
+  --font-read:'Segoe UI',-apple-system,BlinkMacSystemFont,Roboto,'Helvetica Neue',Arial,sans-serif;
   --font-ui:'Segoe UI',-apple-system,BlinkMacSystemFont,Roboto,'Helvetica Neue',Arial,sans-serif;
   --r-s:6px; --r-m:10px; --r-l:14px;
   --bar:#34558b; --accent-fill:#b4502a; --gold-fill:#6e5617;
@@ -31,7 +31,7 @@
 }
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
 html{scroll-behavior:smooth}
-body{background:var(--bg);color:var(--ink);font-family:var(--font-read);font-size:18px;line-height:1.65;
+body{background:var(--bg);color:var(--ink);font-family:var(--font-read);font-size:19px;line-height:1.7;
   background-image:radial-gradient(rgba(120,100,60,.04) 1px,transparent 1px);background-size:32px 32px;
   padding-bottom:calc(74px + env(safe-area-inset-bottom))}
 button{font-family:var(--font-hand);cursor:pointer}
@@ -71,7 +71,6 @@ button{font-family:var(--font-hand);cursor:pointer}
 .btn-warm{background:var(--accent-fill);color:#fff}
 .btn-ghost{background:var(--hl);color:var(--gold);border:1.8px solid var(--gold)}
 .btn:active{transform:scale(.96)}
-.coming{opacity:.65;border-style:dashed}
 /* ===== paper view (answer key) ===== */
 .paper-head{background:var(--paper);border:2px solid var(--ink);border-radius:8px 16px 6px 14px;box-shadow:var(--shadow);padding:16px 18px;margin-top:12px}
 .paper-head h2{font-family:var(--font-title);font-size:27px;color:var(--blue);line-height:1.05}
@@ -88,7 +87,7 @@ section.q:nth-of-type(odd){transform:rotate(.25deg)}
 section.q:nth-of-type(even){transform:rotate(-.25deg)}
 .q-badge{position:absolute;top:-15px;left:16px;background:var(--accent);color:#fff;font-family:var(--font-title);
   font-size:18px;padding:1px 13px 2px;border-radius:4px 12px 5px 10px;transform:rotate(-2deg)}
-.q-text{font-size:18.5px;border-bottom:2px dashed var(--rule);padding-bottom:10px;margin-bottom:4px}
+.q-text{font-size:19.5px;border-bottom:2px dashed var(--rule);padding-bottom:10px;margin-bottom:4px}
 .q-text .qno{font-family:var(--font-title);font-size:22px;color:var(--accent);font-weight:700}
 .mapline{font-family:var(--font-note);font-size:14px;color:var(--accent2);margin:8px 0 0}
 .mapline .tag{background:var(--tint-green);border:1.3px solid var(--accent2);border-radius:9px 4px 8px 5px;padding:1px 9px;margin-right:6px}
@@ -104,10 +103,6 @@ section.q:nth-of-type(even){transform:rotate(-.25deg)}
 .ans ul,.ans ol{margin:7px 0 7px 24px}
 .ans li{margin:5px 0}
 .ans li::marker{color:var(--accent)}
-.hl{background:linear-gradient(180deg,transparent 55%,var(--hl) 55%);padding:0 2px;border-radius:2px}
-.hl-p{background:linear-gradient(180deg,transparent 55%,var(--hl-pink) 55%);padding:0 2px;border-radius:2px}
-.hl-b{background:linear-gradient(180deg,transparent 55%,var(--hl-blue) 55%);padding:0 2px;border-radius:2px}
-.hl-g{background:linear-gradient(180deg,transparent 55%,var(--hl-green) 55%);padding:0 2px;border-radius:2px}
 .term{color:var(--blue);border-bottom:2.2px dashed var(--blue);cursor:pointer;padding:0 2px}
 .term::after{content:"+";font-family:var(--font-title);color:var(--accent);font-size:12px;vertical-align:super;margin-left:1px}
 .term.open{background:var(--bar);color:#fff;border-bottom-color:#fff}
@@ -243,7 +238,7 @@ footer ol{margin:8px 0 2px 22px;font-size:14px;font-family:var(--font-note)}
 html{-webkit-text-size-adjust:100%}
 button{-webkit-tap-highlight-color:rgba(59,75,122,.16)}
 @media (max-width:640px){
-  body{padding:8px 8px calc(78px + env(safe-area-inset-bottom));font-size:17px}
+  body{padding:8px 8px calc(78px + env(safe-area-inset-bottom));font-size:18px}
   .appbar{gap:7px;padding:calc(6px + env(safe-area-inset-top)) 10px 6px}
   .appbar .t{font-size:16.5px}
   .appbar .s{font-size:11px}
@@ -270,8 +265,7 @@ button{-webkit-tap-highlight-color:rgba(59,75,122,.16)}
   .bigpct{font-size:38px}
   .pmini .pl{width:92px;font-size:13px}
   .pmini .pv{width:64px;font-size:11.5px}
-  .stats{display:grid !important;grid-template-columns:repeat(2,1fr) !important;gap:8px !important}
-  #pop{position:fixed;left:8px !important;right:8px !important;top:auto !important;bottom:72px !important;width:auto !important;max-width:none !important}
+    #pop{position:fixed;left:8px !important;right:8px !important;top:auto !important;bottom:72px !important;width:auto !important;max-width:none !important}
   .appbar{position:sticky}
   .appbar .m{font-size:12px}
 }
@@ -285,10 +279,6 @@ button{-webkit-tap-highlight-color:rgba(59,75,122,.16)}
   .qref{padding:1px 2px}
 }
 
-.mockbtn{display:block;width:100%;max-width:520px;margin:8px auto;padding:10px 18px;font-size:17px;text-align:left}
-.mockbtn .msub{display:block;font-size:12.5px;font-family:var(--font-note);opacity:.85;margin-top:2px}
-.srcchip{display:inline-block;background:var(--hl-blue);border:1.3px solid var(--blue);color:var(--blue);
-  border-radius:10px 4px 9px 5px;padding:1px 9px;font-size:12px;font-family:var(--font-note);margin-left:6px;vertical-align:middle}
 .gterm{cursor:pointer}
 .cform{background:var(--paper2);border:2px solid var(--accent2);border-radius:8px 14px 4px 12px;padding:12px 14px;margin:12px 0 4px}
 .cform h4{font-family:var(--font-title);color:var(--success);font-size:19px;margin-bottom:4px}
@@ -303,7 +293,7 @@ button{-webkit-tap-highlight-color:rgba(59,75,122,.16)}
 .syltag{font-family:var(--font-note);font-size:11.5px;border-radius:9px 3px 8px 4px;padding:1px 8px;border:1.3px solid;white-space:nowrap;margin-top:2px}
 .syltag.asked{color:var(--success);border-color:var(--success);background:var(--tint-green)}
 .syltag.notyet{color:var(--accent2);border-color:var(--accent2);background:var(--tint-rose)}
-@media (max-width:640px){.mockbtn{font-size:15.5px;padding:9px 14px}.cform{padding:9px 10px}.cform p,.cform ul{font-size:13.5px}}
+@media (max-width:640px){.cform{padding:9px 10px}.cform p,.cform ul{font-size:13.5px}}
 
 /* ===== v3 study tools: attempt-first, stars, mnemonics, revise view, viva ===== */
 .rvl{display:none;border:2.2px dashed var(--accent);background:var(--hl-pink);color:var(--accent);
@@ -366,7 +356,6 @@ h1,h2,.appbar .t,.paper-head h2,.scorebig{font-family:var(--font-title)}
 .mnem{font-family:var(--font-hand)}
 .ans p{margin:0 0 .85em}
 .ans ul,.ans ol{margin:.2em 0 1em 1.6em}
-.q-text{font-size:18.5px}
 /* level reading path: no tilt */
 section.q,.exm,.fig,.q-badge,.marks{transform:none}
 /* structural heading system */
@@ -411,7 +400,7 @@ span[role="button"].term{cursor:pointer}
 }
 /* dark mode (zero-JS, honours system setting) */
 @media (prefers-color-scheme:dark){
-  :root{
+  :root:not(.light){
     --bg:#191713; --paper:#211e19; --paper2:#2a261f;
     --rule:#3a352c; --rule-strong:#4a443a;
     --ink:#ece5d8; --ink-dim:#a99f8e;
@@ -423,6 +412,19 @@ span[role="button"].term{cursor:pointer}
   }
   body{background-image:radial-gradient(rgba(255,245,220,.05) 1px,transparent 1px)}
 }
+/* manual dark mode (appbar toggle) */
+html.dark{
+  --bg:#191713; --paper:#211e19; --paper2:#2a261f;
+  --rule:#3a352c; --rule-strong:#4a443a;
+  --ink:#ece5d8; --ink-dim:#a99f8e;
+  --accent:#d97757; --accent2:#7fb99a; --blue:#7fa3d9; --gold:#c9b27a;
+  --hl:#4a3d26; --hl-pink:#4a3d26; --hl-blue:#3b3a2c; --hl-green:#3b4030;
+  --bar:#2e4368; --accent-fill:#b4502a; --gold-fill:#6e5617;
+  --tint-green:#24291f; --tint-rose:#2f2725;
+  --shadow:0 1px 2px rgba(0,0,0,.4),0 3px 10px rgba(0,0,0,.35);
+}
+html.dark body{background-image:radial-gradient(rgba(255,245,220,.05) 1px,transparent 1px)}
+html.light body{background-image:radial-gradient(rgba(120,100,60,.04) 1px,transparent 1px)}
 
 /* ===== embedded feedback form ===== */
 .feedback-form{margin:12px 0 4px}
@@ -435,6 +437,45 @@ span[role="button"].term{cursor:pointer}
 .feedback-form small{display:block;color:var(--ink-dim);font-size:12.5px;font-family:var(--font-ui);margin-top:3px}
 .fb-success{background:var(--hl);border:1px solid var(--rule);border-radius:var(--r-s);padding:8px 12px;font-family:var(--font-ui);font-size:14px;color:var(--ink);margin-top:10px}
 @media (max-width:640px){.feedback-form label{font-size:11.5px}}
+
+/* ===== simplified home ===== */
+.note{font-family:var(--font-ui);font-size:12.5px;color:var(--ink-dim);margin:4px 0 10px}
+.toolgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin:8px 0 6px}
+.tool{text-align:left;display:flex;flex-direction:column;gap:3px;background:var(--paper);border:1px solid var(--rule-strong);border-radius:var(--r-m);padding:12px 14px;cursor:pointer;box-shadow:var(--shadow);font-family:var(--font-ui)}
+.tool b{font-size:15px;color:var(--blue)}
+.tool span{font-size:12.5px;color:var(--ink-dim);line-height:1.35}
+.tool:hover{border-color:var(--blue)}
+@media (max-width:440px){.toolgrid{gap:8px}.tool{padding:10px 11px}.tool b{font-size:13.5px}.tool span{font-size:11.5px}}
+
+/* ===== home: four-paper structure ===== */
+.pgroup{font:700 17px/1.3 var(--font-ui);color:var(--blue);margin:22px 0 4px;padding-bottom:5px;border-bottom:2px solid var(--rule-strong)}
+#paper-cards .pgroup:first-child{margin-top:12px}
+.plink{display:flex;justify-content:space-between;align-items:baseline;gap:10px;width:100%;text-align:left;background:var(--paper);border:1px solid var(--rule-strong);border-radius:var(--r-m);padding:10px 14px;margin:7px 0;cursor:pointer;font-family:var(--font-ui);box-shadow:var(--shadow)}
+.plink b{font-size:15px;color:var(--ink)}
+.plink span{font-size:12px;color:var(--ink-dim);white-space:nowrap}
+.plink:hover{border-color:var(--blue)}
+@media (max-width:440px){.plink{flex-direction:column;gap:2px}.plink span{white-space:normal}}
+
+/* ===== display toggles ===== */
+.abar-actions{margin-left:auto;display:flex;gap:6px}
+.abtn{background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.3);color:#fff;border-radius:8px;min-width:34px;height:30px;padding:0 7px;font-family:var(--font-ui);font-size:13px;line-height:1;display:inline-flex;align-items:center;justify-content:center;cursor:pointer}
+.abtn[aria-pressed="true"]{background:#fff;color:var(--bar);border-color:#fff;font-weight:700}
+html.fit .view{max-width:none}
+body.reading .bottomnav{display:none}
+body.reading{padding-bottom:calc(30px + env(safe-area-inset-bottom))}
+body.reading .ans,body.reading .ans p,body.reading .ans li,body.reading .ans td,body.reading .q-text,body.reading .notes,body.reading .marks{font-size:20px}
+body.reading .ans p,body.reading .ans li{line-height:1.9}
+.readexit{position:fixed;right:14px;bottom:calc(14px + env(safe-area-inset-bottom));z-index:80;background:var(--accent);color:#fff;border:none;border-radius:999px;padding:10px 16px;font-family:var(--font-ui);font-size:13px;font-weight:700;box-shadow:var(--shadow)}
+.readexit[hidden]{display:none}
+
+/* ===== popover enrichment ===== */
+#pop-extra .pbox{border:1px solid var(--rule);border-left:3px solid var(--accent2);background:var(--paper2);border-radius:var(--r-s);padding:7px 10px;margin:8px 0;font-size:13.5px;line-height:1.5}
+#pop-extra .pbox.pb-st{border-left-color:var(--accent)}
+#pop-extra .pbox b{display:block;font-family:var(--font-ui);font-size:11px;letter-spacing:.07em;text-transform:uppercase;color:var(--ink-dim);margin-bottom:2px}
+#pop-extra .pfig{margin:8px 0;text-align:center}
+#pop-extra .pfig svg{max-width:100%;height:auto}
+.popmore{display:block;text-align:right;font-family:var(--font-ui);font-size:12.5px;color:var(--blue);text-decoration:none;margin-top:8px;border-top:1px solid var(--rule);padding-top:7px}
+.popmore:hover{text-decoration:underline}
 </style>
 </head>
 <body>
@@ -464,32 +505,20 @@ span[role="button"].term{cursor:pointer}
 <div class="appbar">
   <img src="data:image/png;base64,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" alt="app icon">
   <div><div class="t">MSK Exam Prep</div><div class="s">RGUHS MPT RS-4 — 16 papers · 4 exam series</div></div>
+  <div class="abar-actions">
+    <button class="abtn" id="btn-theme" type="button" aria-pressed="false" title="Theme: follow system — tap for dark, then light">◖</button>
+    <button class="abtn" id="btn-fit" type="button" aria-pressed="false" title="Fit to page — use the full screen width">↔</button>
+    <button class="abtn" id="btn-read" type="button" aria-pressed="false" title="Reading mode — bigger text, hide navigation">Aa</button>
+  </div>
 </div>
 
 <!-- ============ HOME ============ -->
 <main id="main"><div class="view on" id="view-home">
-  <div class="hero">
-    <h1>Interactive answer keys & exam simulator</h1>
-    <p>All four Second Year MPT (RS-4) Musculoskeletal papers across four exam sittings — Nov 2023, May–Jun 2024, May 2025 and Nov 2025 — written from a paper-correction expert's desk: marking schemes, clickable terms, sketch diagrams, examiner's tips.</p>
-    <div class="statrow">
-      <div class="stat"><b id="stat-q">—</b><span>questions</span></div>
-      <div class="stat"><b id="stat-t">—</b><span>papers</span></div>
-      <div class="stat"><b id="stat-a">—</b><span>key terms</span></div>
-      <div class="stat"><b id="stat-b">—</b><span>best mock score</span></div>
-    </div>
-  </div>
-  <button class="btn btn-warm" id="hot-topics-link" style="width:100%;max-width:420px;margin:6px auto 18px;display:block;font-size:17px">What RGUHS keeps asking → repeated-topic analysis</button>
-  <button class="btn" id="dir-link" style="width:100%;max-width:420px;margin:6px auto 0;display:block;font-size:16px">Topic directory → covered topics, links & progress</button>
-  <button class="btn" id="syl-link" style="width:100%;max-width:420px;margin:6px auto 0;display:block;font-size:16px">Full syllabus map → every topic, asked or not</button>
-  <button class="btn" id="bp-link" style="width:100%;max-width:420px;margin:6px auto 0;display:block;font-size:16px">RGUHS blueprint &rarr; expected questions per topic</button>
-  <button class="btn" id="revise-link" style="width:100%;max-width:420px;margin:6px auto 0;display:block;font-size:16px">Revise starred questions &rarr; your flagged list</button>
-  <button class="btn btn-warm" id="viva-link" style="width:100%;max-width:420px;margin:6px auto 0;display:block;font-size:16px">Viva rapid-fire &rarr; flip-card drill from the last-hour sheets</button>
-  <div id="homeprog"><div class="pline"><span id="hptxt">topic progress</span><b id="hppct">0%</b></div><div class="pbar"><div class="pfill" id="hpfill"></div></div></div>
-  <div class="seclabel">MIXED MOCK EXAMS &middot; ONE PER PAPER &middot; 10 RANDOM QUESTIONS FROM ITS FOUR SITTINGS</div>
-  <div id="mockbtns"></div>
-  <div class="seclabel">QUESTION PAPERS</div>
+  <div class="seclabel">THE FOUR PAPERS — SOLVED, YEAR BY YEAR</div>
   <div id="paper-cards"></div>
-  <div class="seclabel">RECENT MOCK SCORES</div>
+  <div class="seclabel">YOUR PROGRESS</div>
+  <div id="homeprog"><div class="pline"><span id="hptxt">topic progress</span><b id="hppct">0%</b></div><div class="pbar"><div class="pfill" id="hpfill"></div></div></div>
+  <p class="note">Recent mock scores</p>
   <div id="homehist"></div>
 </div>
 
@@ -627,7 +656,25 @@ span[role="button"].term{cursor:pointer}
 
 <!-- ============ topic directory ============ -->
 <div class="view" id="view-dir">
+  <div class="hero">
+    <h1>Interactive answer keys & exam simulator</h1>
+    <p>Every RGUHS MPT-MSK paper — Nov 2023 to Nov 2025 — with model answers, marking schemes, examiner's tips and timed mocks.</p>
+    <div class="statrow">
+      <div class="stat"><b id="stat-q">—</b><span>questions</span></div>
+      <div class="stat"><b id="stat-t">—</b><span>papers</span></div>
+      <div class="stat"><b id="stat-a">—</b><span>key terms</span></div>
+      <div class="stat"><b id="stat-b">—</b><span>best mock score</span></div>
+    </div>
+  </div>
   <div class="backbar"><button data-back="home">&larr; Papers</button><span class="chip">progress tracker</span></div>
+  <div class="seclabel">STUDY TOOLS</div>
+  <div class="toolgrid">
+    <button class="tool" id="hot-topics-link"><b>Hot topics</b><span>What RGUHS keeps asking, sitting by sitting</span></button>
+    <button class="tool" id="syl-link"><b>Syllabus map</b><span>Every syllabus topic — asked or not yet</span></button>
+    <button class="tool" id="bp-link"><b>Exam blueprint</b><span>Official RGUHS weightage per topic</span></button>
+    <button class="tool" id="revise-link"><b>Starred questions</b><span>Your flagged list for revision</span></button>
+    <button class="tool" id="viva-link"><b>Viva rapid-fire</b><span>Flip-card drill from the last-hour sheets</span></button>
+  </div>
   <div class="paper-head">
     <h2>Topic directory & progress</h2>
     <div class="sub">Every topic the 16 papers cover — tick a topic once you can answer its questions without looking. Saved on this device.</div>
@@ -13780,20 +13827,24 @@ span[role="button"].term{cursor:pointer}
   <button data-v="home" class="on"><svg viewBox="0 0 24 24"><path d="M3 11 L12 3 L21 11 M5 10 V21 H19 V10"/></svg>Papers</button>
   <button data-v="exam"><svg viewBox="0 0 24 24"><circle cx="12" cy="13" r="8"/><path d="M12 9 V13 L15 15 M9 2 H15"/></svg>Exam</button>
   <button data-v="glossary"><svg viewBox="0 0 24 24"><path d="M4 4 H20 M4 9 H16 M4 14 H20 M4 19 H13"/></svg>Glossary</button>
-  <button data-v="dir"><svg viewBox="0 0 24 24"><path d="M4 13 L9.5 18.5 L20 5.5"/><path d="M4 5 H13 M4 9 H10"/></svg>Topics<br><span class="navbadge" id="navprog">0%</span></button>
+  <button data-v="dir"><svg viewBox="0 0 24 24"><path d="M4 13 L9.5 18.5 L20 5.5"/><path d="M4 5 H13 M4 9 H10"/></svg>Tools<br><span class="navbadge" id="navprog">0%</span></button>
   <button data-v="about"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 11 V16 M12 7.5 V8.5"/></svg>About</button>
 </nav>
 
+<button class="readexit" id="readexit" type="button" hidden>✕ Exit reading mode</button>
 <!-- popover -->
 <div id="pop" role="dialog" aria-labelledby="pop-title" aria-live="polite">
   <button class="close" type="button" aria-label="Close definition">&times;</button>
   <h5 id="pop-title"></h5>
   <div class="m" id="pop-def"></div>
   <div class="t" id="pop-tip"></div>
+  <div class="m" id="pop-extra"></div>
   <div class="rel" id="pop-rel"></div>
+  <a class="popmore" id="pop-more" href="#" target="_blank" rel="noopener">More reference &rarr;</a>
 </div>
 
 <script>
+try{var _t=localStorage.getItem('msktheme');if(_t==='dark'||_t==='light')document.documentElement.classList.add(_t);if(localStorage.getItem('mskfit')==='1')document.documentElement.classList.add('fit');}catch(e){}
 /* ==========================================================
    SITE OWNER CONFIG - the only three lines you ever edit.
    Leave a value as '' to disable that feature.
@@ -14129,27 +14180,20 @@ function renderHome(){
   document.getElementById('stat-b').textContent=best?best.score+'/100':'—';
   updateHomeProgress();
   document.getElementById('stat-a').textContent=Object.keys(DEFS).length;
-  var mb=document.getElementById('mockbtns');mb.innerHTML='';
-  var mcodes=[];PAPERS.forEach(function(p){if(mcodes.indexOf(p.code)<0)mcodes.push(p.code)});
-  mcodes.forEach(function(cc){
-    var pp=PAPERS.filter(function(x){return x.code===cc});
-    var bb=document.createElement('button');bb.className='btn btn-warm mockbtn';
-    bb.setAttribute('data-mock',cc);
-    bb.innerHTML=pp[0].paperNo.replace(' (RS-4)','')+' mixed mock<span class="msub">3 hours · 10 random questions · '+pp.length+' sittings</span>';
-    mb.appendChild(bb);
-  });
   var box=document.getElementById('paper-cards');box.innerHTML='';
-  var lastG='';PAPERS.forEach(function(p){
-    if(p.paperNo!==lastG){lastG=p.paperNo;var gh=document.createElement('div');gh.className='seclabel';gh.textContent=p.paperNo;box.appendChild(gh);}
-    var d=document.createElement('div');d.className='paper-card';
-    d.innerHTML='<h3>'+p.title+'</h3><div class="meta">'+p.session+' · '+p.date+' · QP '+p.code+' · 10 × 10 = 100 marks</div>'+
-      '<div class="row"><button class="btn btn-primary" data-open="'+p.id+'">Open answer key</button></div>';
-    box.appendChild(d);
+  var PNAMES={'Paper I (RS-4)':'Paper I — Fundamentals, Pedagogy & Research','Paper II (RS-4)':'Paper II — Fundamental Principles of MSK Physiotherapy','Paper III (RS-4)':'Paper III — Physical & Functional Diagnosis','Paper IV (RS-4)':'Paper IV — Physiotherapy Interventions'};
+  ['Paper I (RS-4)','Paper II (RS-4)','Paper III (RS-4)','Paper IV (RS-4)'].forEach(function(no){
+    var gh=document.createElement('h3');gh.className='pgroup';gh.textContent=PNAMES[no]||no;
+    box.appendChild(gh);
+    PAPERS.filter(function(p){return p.paperNo===no}).forEach(function(p){
+      var d=document.createElement('button');d.className='plink';
+      d.setAttribute('data-open',p.id);
+      d.innerHTML='<b>'+p.session+' — solved paper</b><span>'+p.date+' · QP '+p.code+' · 10 questions · 100 marks</span>';
+      box.appendChild(d);
+    });
   });
   if(!box.getAttribute('data-bnd')){box.addEventListener('click',function(e){
-    var o=e.target.closest('[data-open]');if(o){openPaper(o.dataset.open);return;}
-    var mk=e.target.closest('[data-mock]');if(mk){startExam(mk.dataset.mock);return;}
-    var x=e.target.closest('[data-mix]');if(x){startExam(x.dataset.mix);}
+    var o=e.target.closest('[data-open]');if(o)openPaper(o.dataset.open);
   });box.setAttribute('data-bnd','1');}
   var hh=document.getElementById('homehist'),hist2=LS.get('history',[]);if(!Array.isArray(hist2))hist2=[];
   if(!hist2.length){hh.innerHTML='<div class="empty">No mock attempts yet — take a 3-hour simulation to log your first score.</div>';}
@@ -14207,6 +14251,110 @@ function relatedTerms(term){
 }
 var pop=document.getElementById('pop'),pt=document.getElementById('pop-title'),pd=document.getElementById('pop-def'),
     pp=document.getElementById('pop-tip'),pr=document.getElementById('pop-rel');
+/* ===== exact values, special tests & diagrams for key terms ===== */
+var EXTRA={
+"SPADI":{om:"13 items — 5 pain + 8 function — each 0\u201310 (VAS/NRS), total 0\u2013100. Higher = worse. MCID 8 points (minimal detectable change 18 on retesting).",ref:"https://www.physio-pedia.com/Shoulder_Pain_and_Disability_Index_(SPADI)"},
+"Constant-Murley score":{om:"100 points: pain 15 \u00b7 ADL 20 \u00b7 range of motion 40 \u00b7 strength 25. Combines subjective and objective components; age- and sex-adjusted normative values exist.",ref:"https://www.physio-pedia.com/Constant-Murley_Shoulder_Outcome_Score"},
+"Harris Hip Score":{om:"100 points: pain 44 \u00b7 function 47 \u00b7 absence of deformity 4 \u00b7 range of motion 5. 90\u2013100 excellent \u00b7 80\u201389 good \u00b7 70\u201379 fair \u00b7 <70 poor.",ref:"https://www.physio-pedia.com/Harris_Hip_Score"},
+"KOOS":{om:"42 items, 5 subscales (pain, other symptoms, ADL, sport/recreation, quality of life), each normalised 0\u2013100 — higher = better. MCID \u2248 8\u201310 points per subscale.",ref:"https://www.physio-pedia.com/Knee_Injury_and_Osteoarthritis_Outcome_Score"},
+"Lysholm score":{om:"0\u2013100: instability 25, pain 25, locking 15, swelling 10, stair climbing 10, squatting 5, limp 5, support 5. \u226595 excellent \u00b7 84\u201394 good \u00b7 65\u201383 fair \u00b7 \u226464 poor.",ref:"https://www.physiotutors.com/questionnaires/tegner-lysholm-knee-score/"},
+"TUG":{om:"Timed Up and Go: rise, walk 3 m, turn, walk back, sit. \u226512 s in older adults = increased fall risk; \u226530 s indicates need for assistance or an aid.",ref:"https://www.physio-pedia.com/Timed_Up_and_Go_Test_(TUG)"},
+"6MWT":{om:"Healthy adults typically cover 400\u2013700 m; a change of 25\u201335 m is clinically meaningful. Stop for chest pain, intolerable dyspnoea, leg cramps, staggering, SpO\u2082 drop.",ref:"https://www.physio-pedia.com/Six_Minute_Walk_Test_/_6_Minute_Walk_Test"},
+"MRC grading":{om:"0 no contraction \u00b7 1 flicker/trace \u00b7 2 full ROM with gravity eliminated \u00b7 3 full ROM against gravity \u00b7 4 against gravity plus resistance \u00b7 5 normal. Grade 3 is the motor-level landmark.",ref:"https://www.physio-pedia.com/Oxford_Scale"},
+"ASIA exam":{om:"A = complete (no sacral sparing S4\u20135) \u00b7 B = sensory incomplete \u00b7 C = motor incomplete, fewer than half of key muscles below the level grade \u22653 \u00b7 D = at least half grade \u22653 \u00b7 E = normal.",ref:"https://www.physio-pedia.com/American_Spinal_Injury_Association_(ASIA)_Impairment_Scale"},
+"T-score":{om:"BMD in SD units vs young-adult mean: \u2265\u22121 normal \u00b7 \u22121 to \u22122.4 low bone mass \u00b7 \u2264\u22122.5 osteoporosis; with a fragility fracture = established osteoporosis.",ref:"https://www.physio-pedia.com/Dual_Energy_X-ray_Absorptiometry_(DEXA_Scan)"},
+"FRAX":{om:"10-year probability of hip and major osteoporotic fracture from age, sex, BMI, prior fracture, parental hip fracture, smoking, glucocorticoids, rheumatoid arthritis, secondary causes, alcohol (\u00b1 femoral-neck BMD). Treatment thresholds commonly hip \u22653% or major \u226520%.",ref:"https://www.physio-pedia.com/Fracture_Risk_Assessment_(FRAX)_Tool"},
+"REBA":{om:"Final score 1\u201315: 1 negligible \u00b7 2\u20133 low \u00b7 4\u20137 medium \u00b7 8\u201310 high \u00b7 11+ very high risk — higher action level = faster ergonomic intervention.",ref:"https://www.physio-pedia.com/Rapid_Entire_Body_Assessment_(REBA)"},
+"RULA":{om:"Final score 1\u20137: 1\u20132 acceptable \u00b7 3\u2013 investigate further \u00b7 5\u20136 investigate and change soon \u00b7 7 change immediately.",ref:"https://www.physio-pedia.com/Rapid_Upper_Limb_Assessment_(RULA)"},
+"Q angle":{om:"Angle of the line from ASIS to mid-patella against the line from mid-patella to tibial tuberosity. Typical: males \u224813\u00b0, females \u224818\u00b0; >15\u00b0 (M) / >20\u00b0 (F) is abnormal \u2014 increased lateral pull on the patella.",diag:"<svg viewBox='0 0 230 150' role='img' aria-label='Q angle diagram'><line x1='55' y1='12' x2='112' y2='82' stroke='#34558b' stroke-width='2.4'/><circle cx='55' cy='12' r='4' fill='#34558b'/><circle cx='112' cy='82' r='6' fill='#b4502a'/><line x1='112' y1='82' x2='152' y2='134' stroke='#34558b' stroke-width='2.4'/><circle cx='152' cy='134' r='4' fill='#34558b'/><path d='M86 52 A34 34 0 0 1 130 98' fill='none' stroke='#b4502a' stroke-width='2'/><text x='100' y='62' font-size='12' fill='#b4502a' font-weight='700'>Q</text><text x='20' y='14' font-size='11' fill='#5c574d'>ASIS</text><text x='118' y='80' font-size='11' fill='#5c574d'>patella</text><text x='158' y='140' font-size='11' fill='#5c574d'>tuberosity</text></svg>",ref:"https://www.physio-pedia.com/Q_Angle"},
+"Cobb angle":{om:"Angle between the most tilted end-vertebrae above and below the curve on an erect AP radiograph; \u226510\u00b0 defines scoliosis. Progression risk is highest with curves 20\u201340\u00b0 and an immature skeleton (Risser 0\u20132).",ref:"https://www.physio-pedia.com/Cobb_Angle"},
+"Baumann angle":{om:"On the AP elbow film, between the long axis of the humerus and the capitellar physis: normal \u224864\u201381\u00b0. A decreased angle indicates extension/posterior tilt of the distal fragment in supracondylar fractures.",ref:"https://radiopaedia.org/articles/baumann-angle-1"},
+"Star excursion balance test":{om:"Eight reach directions normalised to leg length (%LLL). Anterior reach asymmetry >4 cm and composite limb symmetry <94% flag increased lower-limb injury risk.",ref:"https://www.physio-pedia.com/Star_Excursion_Balance_Test"},
+"Widespread Pain Index":{om:"0\u201319 body areas painful in the previous week (2016 ACR fibromyalgia criteria: WPI \u22657 with SSS \u22655, or WPI 3\u20136 with SSS \u22658).",ref:"https://www.physio-pedia.com/The_American_College_of_Rheumatology_2010_preliminary_diagnostic_criteria_for_fibromyalgia"},
+"Tender points (ACR 1990)":{om:"9 bilateral sites (18 points) examined with \u22484 kg thumb pressure; \u226511 painful points with \u22653 months of widespread pain diagnosed fibromyalgia (now superseded by the 2010/2016 criteria).",ref:"https://www.physio-pedia.com/American_College_of_Rheumatology_criteria_for_the_fibromyalgia_classification_(1990)"},
+"MCID":{om:"Minimal clinically important difference — the smallest change a patient perceives as meaningful. Examples: SPADI 8\u201310 pts, KOOS 8\u201310 pts, VAS pain 1.1\u20131.7 cm. Separates statistical from clinical significance.",ref:"https://www.physio-pedia.com/Clinical_Meaningfulness_of_an_Outcome_Measure"},
+"deep neck flexor endurance test":{st:"Supine, chin tucked, head lifted just off the plinth (or pressure biofeedback at 20 mmHg) — hold time recorded. Cut-offs vary; holds below \u224820\u201325 s indicate deep-flexor endurance deficit typical of neck pain and cervicogenic headache.",ref:"https://www.physiotutors.com/assessment/deep-neck-flexor-endurance-test-test-of-harris/"},
+"Neer test":{st:"Stabilise the scapula, passively forward-flex the shoulder. Positive: pain within the 70\u2013120\u00b0 arc = subacromial impingement (Sn 72\u201379%, Sp 53\u201360% (Hegedus meta-analyses) \u2014 interpret as part of a cluster).",ref:"https://www.physio-pedia.com/Neer_Test"},
+"Cozen's test":{st:"Elbow \u224890\u00b0 flexed, forearm pronated; resist active wrist extension. Pain at the lateral epicondyle = lateral epicondylitis (tennis elbow).",ref:"https://www.physiotutors.com/wiki/cozens-test/"},
+"Mill's test":{st:"Shoulder flexed, elbow extended, forearm pronated \u2192 passively flex the wrist. Pain at the lateral epicondyle = positive for lateral epicondylitis.",ref:"https://www.physiotutors.com/wiki/mills-test/"},
+"Lachman test":{st:"Knee flexed 20\u201330\u00b0: one hand stabilises the femur, the other draws the proximal tibia anteriorly. Positive: increased translation with a soft end-feel = ACL. Sn \u224885%, Sp \u224894% — the most sensitive clinical ACL test.",diag:"<svg viewBox='0 0 230 130' role='img' aria-label='Lachman test diagram'><line x1='25' y1='35' x2='112' y2='62' stroke='#34558b' stroke-width='3'/><line x1='112' y1='62' x2='205' y2='96' stroke='#34558b' stroke-width='3'/><circle cx='112' cy='62' r='5' fill='#b4502a'/><path d='M118 96 C104 108 132 108 118 96' fill='none' stroke='#b4502a' stroke-width='2'/><path d='M150 118 L172 108 M172 108 L150 100' stroke='#b4502a' stroke-width='2.4' fill='none'/><text x='30' y='24' font-size='11' fill='#5c574d'>femur stabilised</text><text x='118' y='126' font-size='11' fill='#5c574d'>anterior draw on tibia, 20\u201330\u00b0 flexion</text></svg>",ref:"https://www.physio-pedia.com/Lachman_Test"},
+"Anterior drawer test":{st:"Supine, hip \u224845\u00b0, knee 90\u00b0, foot stabilised; tibia drawn anteriorly. Excessive translation = ACL (Sn \u224870% in chronic knees; hamstrings spasm masks it in acute injury).",ref:"https://www.physio-pedia.com/Anterior_Drawer_Test_of_the_Knee"},
+"Posterior drawer":{st:"Knee 90\u00b0, thumbs on the tibial tuberosity, posteriorly directed force — the most sensitive test for PCL; graded I\u2013III by translation relative to the medial condyle.",ref:"https://www.physio-pedia.com/Posterior_Drawer_Test_(Knee)"},
+"Posterior sag sign":{st:"Supine, hips and knees flexed 90\u00b0 (feet on plinth) — gravity reveals a posterior drop of the tibial plateau = PCL injury.",ref:"https://www.physiotutors.com/wiki/posterior-sag-sign/"},
+"Quadriceps active test":{st:"Seated, knee 90\u00b0; the patient tries to extend against resistance. Visible anterior shift of the tibia back into place = PCL (quadriceps pulls the sagged tibia forward).",ref:"https://www.physiotutors.com/wiki/quadriceps-active-test/"},
+"Pivot shift":{st:"Valgus + internal rotation while flexing the knee from extension; a clunk near 30\u00b0 = ACL deficiency. Sn low awake (\u224825%), high under anaesthesia.",ref:"https://www.physio-pedia.com/Pivot_Shift"},
+"Trendelenburg sign":{st:"Single-leg stance for 30 s: pelvis dropping on the opposite (swing) side = weak gluteus medius on the stance side (L5 pathology, hip disease). Trunk lean toward the stance side = compensated Trendelenburg.",diag:"<svg viewBox='0 0 230 130' role='img' aria-label='Trendelenburg diagram'><line x1='60' y1='30' x2='60' y2='70' stroke='#34558b' stroke-width='2.6'/><line x1='175' y1='30' x2='175' y2='70' stroke='#34558b' stroke-width='2.6'/><line x1='60' y1='30' x2='175' y2='30' stroke='#34558b' stroke-width='2.6'/><line x1='60' y1='70' x2='60' y2='118' stroke='#34558b' stroke-width='2.6'/><line x1='175' y1='70' x2='182' y2='118' stroke='#34558b' stroke-width='2.6'/><circle cx='60' cy='118' r='4' fill='#b4502a'/><path d='M175 44 L198 40 M198 40 L196 52' stroke='#b4502a' stroke-width='2.2' fill='none'/><text x='26' y='126' font-size='11' fill='#b4502a' font-weight='700'>stance</text><text x='112' y='16' font-size='11' fill='#5c574d'>pelvis drops on swing side</text></svg>",ref:"https://www.physio-pedia.com/Trendelenburg_Sign"},
+"Spurling's test":{st:"Seated: extend the neck, rotate and laterally flex toward the symptomatic side, then add axial compression. Reproduction of radiating arm pain = cervical radiculopathy (Sp >90%, Sn \u224850% — good to confirm, poor to exclude).",ref:"https://www.physio-pedia.com/Spurling%27s_Test"},
+"Tinel's sign":{st:"Percuss over the nerve at an entrapment site (classic: median nerve at the wrist). Reproduction of tingling in the nerve's distribution = local irritation or regeneration.",ref:"https://www.physiotutors.com/assessment/tinel-sign/"},
+"Squeeze test":{st:"Compress the fibula toward the tibia at mid-calf. Pain at the distal syndesmosis = high-ankle (syndesmotic) sprain.",ref:"https://www.physiotutors.com/wiki/syndesmosis-squeeze-test/"},
+"Talar tilt":{st:"Hindfoot near neutral; invert the talus in the mortise and compare side-to-side. Asymmetric tilt suggests calcaneofibular and capsular laxity — pair with the anterior drawer for the ATFL.",diag:"<svg viewBox='0 0 230 130' role='img' aria-label='Talar tilt diagram'><line x1='105' y1='18' x2='105' y2='62' stroke='#34558b' stroke-width='3'/><line x1='125' y1='18' x2='125' y2='56' stroke='#34558b' stroke-width='2.4'/><path d='M85 62 Q115 92 148 58' fill='none' stroke='#34558b' stroke-width='2.6'/><path d='M138 40 A26 26 0 0 1 158 74' fill='none' stroke='#b4502a' stroke-width='2.2'/><path d='M156 66 L164 78 M164 78 L150 76' stroke='#b4502a' stroke-width='2' fill='none'/><text x='34' y='20' font-size='11' fill='#5c574d'>tibia</text><text x='131' y='14' font-size='11' fill='#5c574d'>fibula</text><text x='112' y='118' font-size='11' fill='#5c574d'>inversion stress on talus</text></svg>",ref:"https://www.physiotutors.com/wiki/talar-tilt-test/"},
+"Laslett cluster":{st:"\u22653 of 5 SIJ provocation tests positive (distraction, compression, thigh thrust, sacral thrust, Gaenslen) identifies SIJ-mediated pain (Sn \u224891%, Sp \u224878%).",ref:"https://www.physio-pedia.com/Sacroiliac_Joint_Special_Test_Cluster"},
+"painful arc":{st:"Pain between 60\u00b0 and 120\u00b0 of active shoulder abduction = subacromial impingement (above and below the arc is pain-free).",diag:"<svg viewBox='0 0 230 140' role='img' aria-label='Painful arc diagram'><path d='M40 120 A80 80 0 0 1 200 120' fill='none' stroke='#e0d8c8' stroke-width='2'/><path d='M59 78 A80 80 0 0 1 181 78' fill='none' stroke='#b4502a' stroke-width='5'/><line x1='120' y1='120' x2='120' y2='40' stroke='#34558b' stroke-width='2'/><circle cx='120' cy='120' r='4' fill='#34558b'/><text x='126' y='52' font-size='11' fill='#5c574d'>180\u00b0</text><text x='126' y='115' font-size='11' fill='#5c574d'>0\u00b0</text><text x='30' y='56' font-size='11' fill='#b4502a' font-weight='700'>pain 60\u2013120\u00b0</text><text x='34' y='132' font-size='11' fill='#5c574d'>abduction</text></svg>",ref:"https://www.physio-pedia.com/Painful_Arc"},
+"capsular pattern":{kv:"Capsular pattern of passive restriction (Cyriax): shoulder \u2014 external rotation > abduction > internal rotation; elbow \u2014 flexion > extension ( forearm pronation/supination is 0); knee \u2014 flexion > extension; ankle \u2014 inversion > dorsiflexion > eversion.",ref:"https://www.physio-pedia.com/Capsular_and_Non-Capsular_Patterns"},
+"carrying angle":{kv:"Normal valgus at the elbow: \u224811\u00b0 men, \u224813\u00b0 women (10\u201315\u00b0). Increased by cubitus valgus (lateral condyle fracture); decreased/reversed (varus) is the classic late deformity of supracondylar fracture.",diag:"<svg viewBox='0 0 230 150' role='img' aria-label='Carrying angle diagram'><line x1='70' y1='10' x2='115' y2='70' stroke='#34558b' stroke-width='3'/><circle cx='115' cy='70' r='6' fill='#b4502a'/><line x1='115' y1='70' x2='138' y2='132' stroke='#34558b' stroke-width='3'/><line x1='115' y1='14' x2='115' y2='132' stroke='#a99f8e' stroke-width='1.6' stroke-dasharray='5 4'/><path d='M106 108 A38 38 0 0 1 128 112' fill='none' stroke='#b4502a' stroke-width='2'/><text x='134' y='104' font-size='12' fill='#b4502a' font-weight='700'>~12\u00b0</text><text x='30' y='16' font-size='11' fill='#5c574d'>humerus</text><text x='144' y='140' font-size='11' fill='#5c574d'>forearm</text><text x='60' y='60' font-size='11' fill='#5c574d'>valgus</text></svg>",ref:"https://www.physio-pedia.com/Physiotherapy_Management_of_the_Elbow"},
+"Garden classification":{kv:"Femoral neck fractures: I incomplete/valgus impacted, II complete undisplaced, III complete partially displaced (varus), IV fully displaced. I\u2013II \u2014 heal well (may fix in situ); III\u2013IV \u2014 higher AVN and non-union risk.",ref:"https://www.physio-pedia.com/Femoral_Neck_Fractures,_Garden_Classification"},
+"Gait cycle":{kv:"Stance 60% \u00b7 swing 40% \u00b7 cadence \u2248 100\u2013120 steps/min in healthy adults; a stride = 2 steps; double support 2 \u00d7 10% of the cycle (zero in running).",ref:"https://www.physio-pedia.com/The_Gait_Cycle"},
+"Double support time":{kv:"Both feet on the ground \u2014 2 \u00d7 \u224810% of the cycle (\u224820% total). Increases with age, fear and instability; disappears in running.",ref:"https://www.physio-pedia.com/Gait_Definitions"},
+"Ground reaction force":{kv:"Walking vertical GRF shows a double hump (\u2248110% then \u224880% of body weight); running shows a single peak of 2\u20133\u00d7 body weight. Directed along the line from CoP to the body's centre of mass.",ref:"https://en.wikipedia.org/wiki/Ground_reaction_force"},
+"COM":{kv:"Whole-body centre of mass lies \u224855% of standing height, just anterior to S2; during gait it oscillates \u22485 cm vertically and 2\u20134 cm laterally (toward the stance limb).",ref:"https://www.physio-pedia.com/Center_of_Mass"},
+"Impingement stages":{kv:"Neer: stage I \u2014 oedema/haemorrhage, <25 years; stage II \u2014 fibrosis/tendinopathy, 25\u201340; stage III \u2014 rotator-cuff tear/bony change, >40 years.",ref:"https://www.physio-pedia.com/Subacromial_Pain_Syndrome"},
+"Maitland grades":{kv:"Grade I \u2014 small-amplitude oscillations at the start of range; II \u2014 large amplitude within range, not reaching limit; III \u2014 large amplitude up to the limit; IV \u2014 small amplitude at the limit. I\u2013II pain-dominant; III\u2013IV stiffness-dominant.",ref:"https://www.physio-pedia.com/Maitland%27s_Mobilisations"},
+"myotome":{kv:"Key myotomes: C5 shoulder abduction \u00b7 C6 wrist extension \u00b7 C7 elbow extension \u00b7 C8 finger flexion \u00b7 T1 finger abduction \u00b7 L2/L3 hip flexion \u00b7 L4 ankle dorsiflexion \u00b7 L5 great-toe extension \u00b7 S1 plantarflexion/eversion.",ref:"https://www.physio-pedia.com/Myotomes"},
+"Dermatome":{kv:"Landmark dermatomes: C6 thumb \u00b7 C7 middle finger \u00b7 C8 little finger \u00b7 T4 nipple \u00b7 T10 umbilicus \u00b7 L4 medial malleolus \u00b7 L5 dorsum of the great toe \u00b7 S1 lateral foot.",ref:"https://www.physio-pedia.com/Dermatomes"},
+"Plumb line":{kv:"Ideal lateral alignment: earlobe \u2014 acromion \u2014 greater trochanter \u2014 just posterior to the patella \u2014 anterior to the lateral malleolus. Deviations localise the postural fault.",ref:"https://www.physio-pedia.com/Posture"},
+"postural sway":{kv:"Centre-of-pressure excursions during quiet standing; measured on a force platform. Increased sway (especially eyes closed) indicates poorer postural control and fall risk. Clinical screen: single-leg stance time \u2014 healthy adults hold >10 s eyes open; <10 s or marked sway flags a balance deficit.",ref:"https://www.physio-pedia.com/Postural_Control"},
+"scapulohumeral rhythm":{kv:"Overall 2:1 \u2014 \u2248120\u00b0 glenohumeral to \u224860\u00b0 scapulothoracic over the full 180\u00b0 of abduction; the scapula starts contributing after \u224830\u00b0 of arm elevation.",ref:"https://www.physio-pedia.com/Scapulohumeral_Rhythm"},
+"Spinal curves":{kv:"Primary curves (thoracic, sacrococcygeal kyphoses) are present at birth; secondary curves (cervical from \u22483 months with head control, lumbar with standing/walking) develop in front of the spinal column. Balanced curves keep the plumb line off the vertebral bodies.",diag:"<svg viewBox='0 0 230 150' role='img' aria-label='Spinal curves diagram'><circle cx='118' cy='12' r='7' fill='#e0d8c8'/><path d='M118 20 C132 32 132 44 118 54 C104 64 104 76 118 86 C132 96 132 106 118 116 C110 124 110 130 118 138' fill='none' stroke='#34558b' stroke-width='3'/><text x='140' y='40' font-size='11' fill='#b4502a' font-weight='700'>Cervical lordosis</text><text x='8' y='72' font-size='11' fill='#b4502a' font-weight='700'>Thoracic kyphosis</text><text x='140' y='92' font-size='11' fill='#b4502a' font-weight='700'>Lumbar lordosis</text><text x='8' y='130' font-size='11' fill='#b4502a' font-weight='700'>Sacral kyphosis</text></svg>",ref:"https://www.kenhub.com/en/library/anatomy/curvature-and-movements-of-the-vertebral-column"},
+"Trigger point":{kv:"Travell & Simons diagnostic criteria: taut band, spot tenderness, referred pain pattern on pressure, local twitch response to snapping palpation, and reproduction of the patient's pain. Managed by ischemic compression / dry needling / stretch-and-spray.",ref:"https://www.physio-pedia.com/Trigger_Points"},
+"joint play":{kv:"Accessory (arthrokinematic) movements \u2014 roll, spin, glide \u2014 not available to voluntary control; assessed as joint-play movements and treated with Maitland/Kaltenborn grades.",ref:"https://www.physio-pedia.com/Arthrokinematics"},
+"convex-concave rule":{kv:"Kaltenborn: a convex surface moving on a fixed concave surface glides opposite to the roll (e.g., humeral head glides inferiorly during abduction); a concave surface on a fixed convex surface glides in the same direction as the roll (e.g., tibia on femur during knee flexion).",ref:"https://www.physio-pedia.com/Principles_of_Joint_Mobilisation"},
+"Wolff's law":{kv:"Bone remodels along lines of mechanical stress \u2014 loading strengthens, disuse leads to porosis. Basis for progressive weight-bearing in fracture rehabilitation.",ref:"https://www.physio-pedia.com/Wolff%27s_Law"},
+"creep":{kv:"Time-dependent continuing deformation of a tissue under a constant load \u2014 basis of prolonged low-load stretching (e.g., serial splinting, static progressive splinting).",ref:"https://www.physio-pedia.com/Tendon_Biomechanics"},
+"Phases of healing":{kv:"Inflammatory \u2248 days 0\u20135 (clot, acute inflammation) \u00b7 proliferation/fibroblastic \u2248 days 4\u201321 (granulation, collagen III) \u00b7 remodelling from \u2248 day 21 up to 1\u20132 years (collagen I, alignment along stress).",ref:"https://www.physio-pedia.com/Soft_Tissue_Healing"},
+"Progressive overload":{kv:"Load must exceed the current capacity of the tissue, and be increased progressively, for adaptation to continue \u2014 too little stalls progress, too much exceeds repair capacity.",ref:"https://www.physio-pedia.com/Principles_of_Exercise_Physiology_and_Adaptation"},
+"SAID principle":{kv:"Specific Adaptation to Imposed Demands \u2014 tissues adapt specifically to the type of demand: heavy loading strengthens tendon/bone, endurance work improves oxidative capacity.",ref:"https://www.physio-pedia.com/Introduction_to_Therapeutic_Exercise"},
+"FITT principle":{kv:"Exercise prescription: Frequency \u00b7 Intensity \u00b7 Time (duration) \u00b7 Type (mode). Progress one variable at a time.",ref:"https://www.physio-pedia.com/FITT_Principle"},
+"20-20-20 rule":{kv:"Ergonomic eye advice: every 20 minutes of screen work, look at something 20 feet (\u22486 m) away for 20 seconds to relax accommodation.",ref:"https://www.aoa.org/healthy-eyes/eye-and-vision-conditions/computer-vision-syndrome/20-20-20-rule"},
+"VO2 max":{kv:"Maximal oxygen uptake \u2014 gold standard of cardiorespiratory fitness; measured by graded exercise test with gas analysis. Typical healthy untrained adults \u224835\u201345 ml/kg/min.",ref:"https://www.physio-pedia.com/VO2_Max"},
+"MET":{kv:"1 MET = 3.5 ml O2/kg/min (resting metabolic rate). Light <3, moderate 3\u20136, vigorous >6 METs; 500\u20131000 MET-min/week meets WHO activity guidance.",ref:"https://www.physio-pedia.com/Metabolic_Equivalents_(METS)"},
+"TENS":{kv:"Conventional: high frequency 50\u2013100 Hz, short pulse duration, sensory-level intensity \u2014 fast, short-lived analgesia (gate control). Acupuncture-like: 2\u20134 Hz at motor level, longer analgesia (opioid-mediated). Electrode placement: over the painful area or the nerve/segment.",ref:"https://www.physio-pedia.com/Transcutaneous_Electrical_Nerve_Stimulation_(TENS)"},
+"Interferential therapy":{kv:"Two medium-frequency currents (classically 4000 Hz \u00b1 a small difference) cross and beat at 1\u2013250 Hz \u2014 the low-frequency therapeutic effect with comfortable medium-frequency skin impedance.",ref:"https://www.physio-pedia.com/Interferential_Therapy"},
+"Russian current":{kv:"Kots: 2500 Hz alternating current delivered in bursts at 50 bursts/s, 50% duty cycle; designed for motor strengthening (10 \u00d7 10 s '10/50/10' schedule).",ref:"https://www.electrotherapy.org/russian-and-bmac"},
+"phase duration":{kv:"Pulse phase in microseconds \u2014 the main determinant of which axons are recruited: longer phases (200\u2013400 \u00b5s) reach motor threshold at lower current; very long phases are uncomfortable and risk chemical burns.",ref:"https://podiapaedia.org/wiki/physical-therapies/electrotherapy/electrical-basis-of-electrotherapy/"},
+"Duty cycle":{kv:"On:off ratio of stimulated contractions \u2014 for strengthening \u22481:3\u20131:5, allowing partial recovery and delaying fatigue (e.g., 10 s on, 50 s off).",ref:"https://www.electrotherapy.org/muscle-stimulation-nmes"},
+"Motor point":{kv:"Where the motor nerve enters the muscle belly \u2014 stimulation there recruits the most fibres at the least current; mapped with a stimulator pen.",ref:"https://link.springer.com/article/10.1186/1743-0003-11-17"},
+"Low-level laser therapy":{kv:"Photobiomodulation, classically GaAlAs 820\u2013830 nm; typical doses 3\u201310 J/cm\u00b2 for analgesia/tissue healing \u2014 non-thermal, eye protection required.",ref:"https://www.physio-pedia.com/Low_Level_Laser_Therapy"},
+"pulsed electromagnetic field":{kv:"Non-thermal, time-varying magnetic fields; best evidence in delayed union and fracture healing (also used for fresh fractures and osteoarthritis pain).",ref:"https://www.physio-pedia.com/Pulsed_Electromagnetic_Field_Therapy_(PEMF)"},
+"counterirritation":{kv:"Superficial noxious/thermal stimulus applied over a painful area to reduce deeper pain \u2014 explained by gate control (large-fibre and segmental competition).",ref:"https://pmc.ncbi.nlm.nih.gov/articles/PMC6665061/"},
+"Cronbach's alpha":{kv:"Internal consistency of a scale: \u22650.7 acceptable, \u22650.8 good, >0.95 suggests item redundancy; report with the full scale and each subscale.",ref:"https://stats.oarc.ucla.edu/spss/faq/what-does-cronbachs-alpha-mean/"},
+"P-value":{kv:"Probability of results at least this extreme if the null hypothesis is true. Convention p<0.05 = statistically significant; it is not the probability that the null hypothesis is true, nor the size of the effect.",ref:"https://www.scribbr.com/statistics/p-value/"},
+"Type I error":{kv:"Rejecting a true null hypothesis \u2014 a false positive; rate \u03b1 (usually 0.05). Reduced by a stricter \u03b1 and correct one-tailed planning.",ref:"https://www.scribbr.com/statistics/type-i-and-type-ii-errors/"},
+"Type II error":{kv:"Failing to reject a false null hypothesis \u2014 a false negative; rate \u03b2. Power = 1 \u2212 \u03b2, conventionally \u22650.80 (80%).",ref:"https://www.scribbr.com/statistics/type-i-and-type-ii-errors/"},
+"Null hypothesis":{kv:"The statement of no difference/no association that a statistical test attempts to reject; rejected when p < the pre-set \u03b1.",ref:"https://www.scribbr.com/statistics/null-and-alternative-hypotheses/"},
+"Median":{kv:"50th percentile \u2014 half the values below, half above; robust to outliers and preferred for skewed or ordinal data (report with IQR).",ref:"https://www.scribbr.com/statistics/median/"},
+"normality assumption":{kv:"Parametric tests assume approximately normal data: check Shapiro\u2013Wilk (small samples) or Kolmogorov\u2013Smirnov (larger), plus visual inspection (histogram, Q\u2013Q plot). Violated \u2192 use non-parametric equivalents.",ref:"https://stats.libretexts.org/Bookshelves/Applied_Statistics/Mikes_Biostatistics_Book_(Dohm)/13%3A_Assumptions_of_Parametric_Tests/13.3%3A_Test_assumption_of_normality"},
+"Likert scale":{kv:"Ordered response scale (commonly 5- or 7-point strongly disagree \u2192 strongly agree). Treat as ordinal; summarise with median/IQR or use validated scoring instructions.",ref:"https://www.scribbr.com/methodology/likert-scale/"},
+"Hierarchy of evidence":{kv:"Top to bottom: systematic reviews/meta-analyses of RCTs \u2192 RCTs \u2192 cohort studies \u2192 case\u2013control \u2192 case series/reports \u2192 expert opinion. Higher levels control bias better; lower levels still inform rare-condition management.",ref:"https://www.physio-pedia.com/Hierarchy_of_evidence"},
+"level of evidence":{kv:"Applied to a single study (I = high-quality RCT or review of RCTs, descending to V = expert opinion); guides how much a recommendation should change practice.",ref:"https://www.physio-pedia.com/Grades_and_Levels_of_Evidence"},
+"PICOT question":{kv:"P opulation \u00b7 I ntervention \u00b7 C omparison \u00b7 O utcome \u00b7 T ime frame \u2014 the four/five elements of a focused, searchable clinical question.",ref:"https://www.physio-pedia.com/PICOT_Research_Question"},
+"Blinding":{kv:"Single = participant; double = participant + assessor/therapist; triple = + data analyst. Prevents performance and detection (expectation) bias; allocation concealment is separate and always required.",ref:"https://pmc.ncbi.nlm.nih.gov/articles/PMC8308085/"},
+"Randomisation":{kv:"Chance allocation to groups, with concealed allocation; balances known and unknown confounders and is the core of an RCT's internal validity.",ref:"https://www.mja.com.au/journal/2002/177/10/randomisation-clinical-trials"},
+"Cluster sampling":{kv:"Randomly sampling intact groups (clinics, classes, schools) rather than individuals \u2014 practical, but reduce precision (design effect) and analyse at cluster level.",ref:"https://www.scribbr.com/methodology/cluster-sampling/"},
+"Stratified sampling":{kv:"Divide the population into strata (e.g., by sex or year) and sample within each, guaranteeing all key subgroups are represented.",ref:"https://www.scribbr.com/methodology/stratified-sampling/"},
+"Systematic sampling":{kv:"Every kth element from a random start on a sampling frame \u2014 simple, but vulnerable to periodicity in the list.",ref:"https://www.scribbr.com/methodology/systematic-sampling/"},
+"sampling frame":{kv:"The actual list of every member of the accessible population from which the sample is drawn \u2014 the sample is only as good as the frame.",ref:"https://en.wikipedia.org/wiki/sampling_frame"},
+"Trustworthiness criteria":{kv:"Lincoln & Guba's rigour of qualitative research: credibility (truth), transferability (applicability), dependability (consistency), confirmability (neutrality) \u2014 the qualitative counterparts of internal/external validity and reliability.",ref:"https://methods.sagepub.com/ency/edvol/the-sage-encyclopedia-of-social-science-research-methods/chpt/trustworthiness-criteria#_"},
+"Grounded theory":{kv:"Theory generated from data: simultaneous collection and analysis, constant comparison, theoretical sampling until saturation; output is a theory/categories, not a summary.",ref:"https://pmc.ncbi.nlm.nih.gov/articles/PMC6318722/"},
+"Phenomenology":{kv:"Study of lived experience: in-depth interviews with few participants; bracketing of the researcher's assumptions; reports the essence of the experience.",ref:"https://researchmethodscommunity.sagepub.com/blog/qualitative-methodologies-phenomenology"},
+"Thematic analysis":{kv:"Braun & Clarke's six phases: familiarisation \u2192 coding \u2192 generating themes \u2192 reviewing \u2192 defining/naming \u2192 reporting.",ref:"https://www.tandfonline.com/doi/abs/10.1191/1478088706qp063oa"},
+"Saturation":{kv:"The stopping point of qualitative sampling \u2014 new interviews yield no new themes or codes; typically \u224810\u201315 in-depth interviews.",ref:"https://link.springer.com/article/10.1007/s11135-017-0574-8"},
+"Pilot study":{kv:"Small-scale feasibility run (recruitment, measures, procedures, drop-out) \u2014 it refines protocol and sample-size estimates; it is not a hypothesis test.",ref:"https://www.nccih.nih.gov/grants/pilot-studies-common-uses-and-misuses"},
+"informed consent":{kv:"Voluntary agreement given with capacity, full disclosure (purpose, procedures, risks, benefits, alternatives) and freedom to withdraw at any point without penalty; documented and ongoing.",ref:"https://www.physio-pedia.com/Informed_Consent"},
+"Evidence-based practice":{kv:"Sackett: the integration of best research evidence with clinical expertise and the patient's values and circumstances \u2014 all three are required.",ref:"https://www.physio-pedia.com/Evidence_Based_Practice_(EBP)"},
+"TrA & multifidus":{kv:"Feed-forward activation of transversus abdominis \u224830 ms before limb movement (Hodges); delayed in low-back pain \u2014 the basis of motor-control retraining (draw-in + multifidus cues).",ref:"https://www.physio-pedia.com/Core_Muscles"},
+"steppage gait":{kv:"Foot drop from L5/common peroneal palsy: high-stepping swing with knee and hip flexion to clear the toes; slapping foot if control is partial.",ref:"https://www.physio-pedia.com/Gait_Deviations"},
+"Antalgic list":{kv:"Pain-relieving lateral trunk lean toward the painful side in the stance phase, reducing joint compression on that side; shortened stance phase and cadence.",ref:"https://www.physio-pedia.com/Gait:_Antalgic"}
+};
 function fillPop(term){
   var raw=DEFS[term];if(!raw)return false;
   var parts=raw.split('|');
@@ -14218,6 +14366,19 @@ function fillPop(term){
   var rel=relatedTerms(term);
   if(rel.length){html+=' <span style="color:var(--blue);margin-left:2px">related:</span> ';rel.forEach(function(r){html+='<button data-term="'+r+'">'+r+'</button>';});}
   pr.innerHTML=html;pr.style.display=html?'block':'none';
+  var pe=document.getElementById('pop-extra'),ex=EXTRA[term];
+  if(pe){
+    if(ex){
+      var h='';
+      if(ex.om)h+='<div class="pbox pb-om"><b>Outcome measure</b>'+ex.om+'</div>';
+      if(ex.st)h+='<div class="pbox pb-st"><b>Special test</b>'+ex.st+'</div>';
+      if(ex.kv)h+='<div class="pbox pb-kv"><b>Key values</b>'+ex.kv+'</div>';
+      if(ex.diag)h+='<div class="pfig">'+ex.diag+'</div>';
+      pe.innerHTML=h;pe.style.display=h?'block':'none';
+    }else{pe.innerHTML='';pe.style.display='none';}
+  }
+  var mr=document.getElementById('pop-more');
+  if(mr)mr.href=(ex&&ex.ref)?ex.ref:'https://www.physio-pedia.com/index.php?search='+encodeURIComponent(term);
   return true;
 }
 function positionPop(el){
@@ -14766,6 +14927,34 @@ function vivaPaint(){
     for(var i=vOrder.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=vOrder[i];vOrder[i]=vOrder[j];vOrder[j]=t;}
     vCur=0;vivaPaint();});
   vivaPaint();
+
+/* ===== display toggles ===== */
+var bT=document.getElementById('btn-theme'),bF=document.getElementById('btn-fit'),bR=document.getElementById('btn-read'),xR=document.getElementById('readexit');
+function themeState(){var r=document.documentElement;return r.classList.contains('dark')?'dark':r.classList.contains('light')?'light':'auto';}
+function syncDisplay(){
+  var r=document.documentElement;
+  if(bT){var st=themeState();bT.setAttribute('aria-pressed',st==='dark');bT.title='Theme: '+(st==='auto'?'follow system':st)+' — tap to change';bT.innerHTML=st==='light'?'☀':'◖';}
+  if(bF){bF.setAttribute('aria-pressed',r.classList.contains('fit'));}
+  if(bR){bR.setAttribute('aria-pressed',document.body.classList.contains('reading'));}
+  if(xR){xR.hidden=!document.body.classList.contains('reading');}
+}
+if(bT)bT.addEventListener('click',function(){
+  var nx=themeState()==='auto'?'dark':themeState()==='dark'?'light':'auto';
+  var r=document.documentElement;r.classList.remove('dark','light');
+  if(nx!=='auto'){r.classList.add(nx);localStorage.setItem('msktheme',nx);}else localStorage.setItem('msktheme','');
+  syncDisplay();track('display_toggled');
+});
+if(bF)bF.addEventListener('click',function(){
+  var r=document.documentElement;r.classList.toggle('fit');
+  localStorage.setItem('mskfit',r.classList.contains('fit')?'1':'');
+  syncDisplay();track('display_toggled');
+});
+if(bR)bR.addEventListener('click',function(){
+  document.body.classList.toggle('reading');syncDisplay();track('display_toggled');
+});
+if(xR)xR.addEventListener('click',function(){document.body.classList.remove('reading');syncDisplay();});
+syncDisplay();
+
 })();
 document.getElementById('viva-link').addEventListener('click',function(){vivaPaint();show('viva');});
 document.getElementById('revise-link').addEventListener('click',function(){renderRevise();show('revise');});
