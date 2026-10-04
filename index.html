@@ -605,6 +605,11 @@ a.simplink:hover{background:var(--hl);border-color:var(--accent2)}
 body.reading #scontent .qt,body.reading #scontent li{font-size:19px}
 body.reading #scontent li{line-height:1.85}
 
+/* ---- listen (browser speech) ---- */
+.listenbtn{border:1px solid var(--rule);background:var(--paper);color:var(--accent);border-radius:999px;
+  padding:3px 11px;font-family:var(--font-ui);font-size:12px;cursor:pointer;margin:0 8px 8px 0}
+.listenbtn:hover{border-color:var(--accent)}
+.listenbtn.on{background:var(--accent);color:#fff;border-color:var(--accent)}
 </style>
 </head>
 <body>
@@ -15528,6 +15533,53 @@ document.addEventListener('keydown',function(e){
     for(var i=0;i<PAPERS.length;i++){ var id=PAPERS[i].id;
       if((SIM[id]||{}).p===pno&&(SIM[id]||{}).s===ses){ openSimple(id); return; } }
   });
+})();
+</script>
+
+
+<script>
+/* ===== Listen: read any answer aloud with the browser's own voice (no key, no files) ===== */
+(function(){
+  if(!('speechSynthesis' in window)) return;
+  function clean(t){
+    return String(t).replace(/\u2192/g,' to ').replace(/\u00b7/g,' , ').replace(/\u2014/g,', ')
+      .replace(/\u2019/g,"'").replace(/\u00b5/g,' micro ').replace(/\u00b0/g,' degrees ')
+      .replace(/\u00d7/g,' times ').replace(/\s+/g,' ').trim();
+  }
+  function cardText(el){
+    var c=el.cloneNode(true);
+    [].forEach.call(c.querySelectorAll('details,.src,.listenbtn,.full,.simplink,.qstar,.tick'),function(x){x.remove()});
+    return clean(c.textContent||'');
+  }
+  var cur=null;
+  function stop(){
+    try{ speechSynthesis.cancel(); }catch(e){}
+    if(cur){ cur.classList.remove('on'); cur.textContent='▶ Listen'; cur=null; }
+  }
+  function speak(el,btn){
+    if(cur===btn){ stop(); return; }
+    stop();
+    var u=new SpeechSynthesisUtterance(cardText(el));
+    u.lang='en-IN'; u.rate=0.95; u.pitch=1;
+    u.onend=function(){ if(cur===btn) stop(); };
+    u.onerror=function(){ if(cur===btn) stop(); };
+    cur=btn; btn.classList.add('on'); btn.textContent='■ Stop';
+    try{ speechSynthesis.cancel(); speechSynthesis.speak(u); }catch(e){}
+    /* watchdog: if nothing actually started (no voices), put the button back */
+    setTimeout(function(){
+      if(cur===btn && !speechSynthesis.speaking && !speechSynthesis.pending) stop();
+    }, 1500);
+  }
+  var cards=document.querySelectorAll('#papercontent section.q, #scontent article.q');
+  [].forEach.call(cards,function(el){
+    var b=document.createElement('button');
+    b.type='button'; b.className='listenbtn'; b.textContent='▶ Listen';
+    var host=el.querySelector('.simplink')||el.querySelector('.full');
+    if(host && host.parentNode===el){ el.insertBefore(b, host.nextSibling); } else { el.appendChild(b); }
+    b.addEventListener('click',function(e){ e.preventDefault(); speak(el,b); });
+  });
+  document.querySelectorAll('.bottomnav button').forEach(function(b){ b.addEventListener('click',stop); });
+  console.log('listen buttons:', cards.length);
 })();
 </script>
 
