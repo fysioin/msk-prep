@@ -13977,7 +13977,19 @@ var SITE={
     document.head.appendChild(p);
   }
   if('serviceWorker' in navigator&&(location.protocol==='https:'||location.hostname==='localhost')){
-    navigator.serviceWorker.register('sw.js').catch(function(){});
+    navigator.serviceWorker.register('sw.js').then(function(reg){
+      try{ reg.update(); }catch(e){}
+      function swap(){
+        if(!navigator.serviceWorker.controller) return;      /* first visit: do nothing */
+        if(window.exam&&exam.state==='run') return;          /* never interrupt a running mock */
+        location.reload();
+      }
+      if(reg.waiting) swap();
+      reg.addEventListener('updatefound',function(){
+        var w=reg.installing; if(!w) return;
+        w.addEventListener('statechange',function(){ if(w.state==='installed') swap(); });
+      });
+    }).catch(function(){});
   }
 })();
 function track(ev,props){
