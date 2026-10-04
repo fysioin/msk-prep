@@ -15039,6 +15039,19 @@ document.getElementById('bp-link').addEventListener('click',function(){renderBlu
 /* ================= boot ================= */
 renderHome();renderExamIntro();renderGlossary();
 if(!resumeIfRunning())show('home');
+/* deep link support: index.html#p<paperId>q<n> opens that paper and jumps to the question */
+(function(){
+  function fromHash(){
+    var h=(location.hash||'').replace('#','');
+    var m=h.match(/^p([A-Za-z0-9]+)q([0-9]+)$/);
+    if(!m) return;
+    openPaper(m[1]);
+    var el=document.getElementById(h);
+    if(el) setTimeout(function(){ el.scrollIntoView({block:'start'}); },140);
+  }
+  window.addEventListener('hashchange',fromHash);
+  if(location.hash) fromHash();
+})();
 /* ===== embedded feedback form ===== */
 window.__fbSent=false;
 function handleFormSubmit(){
