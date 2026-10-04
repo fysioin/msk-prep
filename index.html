@@ -574,6 +574,17 @@ a.tool.homeentry b{color:var(--accent2)}
 a.simplink{background:var(--hl-green);color:var(--accent2);border-color:var(--rule)}
 a.simplink:hover{background:var(--hl);border-color:var(--accent2)}
 
+/* ---- ask (offline assistant) ---- */
+.asklog{margin:10px 0 4px}
+.msg{max-width:94%;padding:9px 12px;border-radius:12px;margin:8px 0;font-size:15px;line-height:1.55}
+.msg.me{margin-left:auto;background:var(--accent);color:#fff}
+.msg.ai{background:var(--paper);border:1px solid var(--rule)}
+.msg .mh{font-weight:600;margin-bottom:4px}
+.msg ul{margin:4px 0 0;padding-left:18px}
+.msg li{margin:3px 0}
+.msg .gdef{margin-top:6px;font-size:13.5px;color:var(--ink-dim);border-top:1px dashed var(--rule);padding-top:6px}
+.askrow{display:flex;gap:8px;align-items:center;margin-top:10px}
+.askrow .searchbox{margin:0}
 </style>
 </head>
 <body>
@@ -612,6 +623,7 @@ a.simplink:hover{background:var(--hl);border-color:var(--accent2)}
 
 <!-- ============ HOME ============ -->
 <main id="main"><div class="view on" id="view-home">
+  <button class="tool" id="ask-home" type="button"><b>Ask the notes &rarr;</b><span>Ask a question and get the answer from all 16 papers &mdash; offline, no account</span></button>
   <a class="tool homeentry" href="simplified-companion.html"><b>Simple English answers &rarr;</b><span>All 16 papers rewritten in plain English bullets, with tap-to-define terms</span></a>
   <div class="seclabel">THE FOUR PAPERS — SOLVED, YEAR BY YEAR</div>
   <div id="paper-cards"></div>
@@ -773,6 +785,7 @@ a.simplink:hover{background:var(--hl);border-color:var(--accent2)}
     <button class="tool" id="bp-link"><b>Exam blueprint</b><span>Official RGUHS weightage per topic</span></button>
     <button class="tool" id="revise-link"><b>Starred questions</b><span>Your flagged list for revision</span></button>
     <button class="tool" id="viva-link"><b>Viva rapid-fire</b><span>Flip-card drill from the last-hour sheets</span></button>
+    <button class="tool" id="ask-link" type="button"><b>Ask the notes</b><span>Offline question answering across all 16 papers</span></button>
     <a class="tool" id="simp-link" href="simplified-companion.html"><b>Simple English answers</b><span>All 16 papers rewritten in plain English, with tap-to-define terms</span></a>
   </div>
   <div class="paper-head">
@@ -13827,6 +13840,23 @@ a.simplink:hover{background:var(--hl);border-color:var(--accent2)}
 </div>
 
 <!-- ============ GLOSSARY ============ -->
+<div class="view" id="view-ask">
+  <div class="backbar"><button data-back="home">&larr; Papers</button><span class="chip">ask</span></div>
+  <div class="paper-head"><h2>Ask the notes</h2>
+    <div class="sub">Ask a question and get the answer from all 16 papers. Works offline &mdash; no account, no key.</div></div>
+  <div class="toolgrid">
+    <button class="tool" data-ask="frozen shoulder"><b>frozen shoulder</b><span>adhesive capsulitis</span></button>
+    <button class="tool" data-ask="NMES parameters waveform"><b>NMES</b><span>parameters &amp; waveform</span></button>
+    <button class="tool" data-ask="p-value hypothesis testing"><b>p-value</b><span>hypothesis testing</span></button>
+    <button class="tool" data-ask="Cobb angle scoliosis"><b>Cobb angle</b><span>scoliosis</span></button>
+  </div>
+  <div id="asklog" class="asklog"></div>
+  <div class="askrow">
+    <input class="searchbox" id="askq" type="search" placeholder="e.g. what does the examiner want on frozen shoulder?" autocomplete="off">
+    <button class="btn" id="askgo" type="button">Ask</button>
+  </div>
+</div>
+
 <div class="view" id="view-glossary">
   <div class="backbar"><button data-back="home">← Papers</button><span class="chip">glossary</span></div>
   <div class="paper-head">
@@ -15046,6 +15076,95 @@ function vivaPaint(){
     for(var i=vOrder.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=vOrder[i];vOrder[i]=vOrder[j];vOrder[j]=t;}
     vCur=0;vivaPaint();});
   vivaPaint();
+
+  /* ---------- Ask: offline retrieval over the full answers ---------- */
+  var CORP=[],DF={},AVG=1,NC=0;
+  var STOP={a:1,an:1,the:1,of:1,is:1,are:1,and:1,or:1,to:1,in:1,on:1,for:1,with:1,what:1,which:1,how:1,why:1,when:1,who:1,does:1,do:1,can:1,my:1,me:1,i:1,it:1,its:1,as:1,at:1,by:1,be:1,from:1,that:1,this:1,these:1,those:1,about:1,into:1,not:1,but:1,if:1,then:1,than:1,so:1,up:1,out:1,we:1,you:1,they:1,he:1,she:1,will:1,would:1,should:1,could:1,explain:1,define:1,tell:1,give:1,write:1,describe:1,discuss:1,list:1,mention:1,want:1,wants:1,examiner:1};
+  function atok(s){return (String(s).toLowerCase().match(/[a-z0-9]+/g)||[]).filter(function(t){return t.length>2&&!STOP[t]})}
+  function aesc(x){return String(x).replace(/[&<>]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;'}[c]})}
+  function buildCorpus(){
+    CORP=[];
+    document.querySelectorAll('#papercontent section.q').forEach(function(el){
+      var m=(el.id||'').match(/^p(.+)q([0-9]+)$/); if(!m)return;
+      function g(sel){var x=el.querySelector(sel);return x?x.textContent:''}
+      var w=g('.mapline').replace(/^\s*SYLLABUS\s*/,'');
+      /* the app's answers are prose: take sentences from .ans, skipping reference lists */
+      var units=[];
+      var ansel=el.querySelector('.ans');
+      if(ansel){
+        var txt=[].map.call(ansel.querySelectorAll('p'),function(p){
+          return p.closest('.refs')||p.closest('ol')?'':p.textContent;}).join(' ');
+        txt.split(/\.\s+/).forEach(function(x){x=x.trim();
+          if(x.length>25&&!/^https?:/.test(x))units.push(/\.$/.test(x)?x:x+'.');});
+        [].forEach.call(ansel.querySelectorAll('li'),function(li){
+          if(li.closest('.refs')||li.closest('ol'))return;
+          var t=li.textContent.trim(); if(t.length>15)units.push(t);});
+      }
+      CORP.push({id:el.id,pid:m[1],n:+m[2],q:g('.q-text'),w:w,h:g('.exm'),b:units,
+        text:[g('.q-text'),w,units.join(' '),g('.exm')].join(' ')});
+    });
+    DF={};
+    CORP.forEach(function(d){d.tf={};atok(d.text).forEach(function(t){d.tf[t]=(d.tf[t]||0)+1});
+      Object.keys(d.tf).forEach(function(t){DF[t]=(DF[t]||0)+1})});
+    NC=CORP.length; var tot=0;
+    CORP.forEach(function(d){Object.keys(d.tf).forEach(function(t){tot+=d.tf[t]})});
+    AVG=NC?tot/NC:1;
+  }
+  function bm25(qt,d){
+    var k1=1.5,b=0.75,s=0,dl=0; Object.keys(d.tf).forEach(function(t){dl+=d.tf[t]});
+    qt.forEach(function(t){ if(!d.tf[t])return;
+      var idf=Math.log(1+(NC-DF[t]+0.5)/(DF[t]+0.5));
+      s+=idf*(d.tf[t]*(k1+1))/(d.tf[t]+k1*(1-b+b*dl/AVG));
+    });
+    var ql=d.q.toLowerCase(); qt.forEach(function(t){ if(ql.indexOf(t)>-1)s+=1.0; });
+    return s;
+  }
+  function findTerm(text){
+    var low=text.toLowerCase(),hit=null;
+    Object.keys(DEFS).forEach(function(k){var d=String(k);
+      if(!hit&&d.length>3&&low.indexOf(d.toLowerCase())>-1)hit=k;});
+    return hit;
+  }
+  function ask(text){
+    if(!CORP.length)buildCorpus();
+    var qt=atok(text),out={title:'',lines:[],ref:null,term:findTerm(text)};
+    var ranked=CORP.map(function(d){return {d:d,s:bm25(qt,d)}}).sort(function(a,b){return b.s-a.s});
+    var top=ranked[0];
+    if(!qt.length||!top||top.s<1){
+      out.title='I could not find that in the notes.';
+      out.lines=['Try a topic word — for example “frozen shoulder”, “NMES”, “p-value”, “Cobb angle”.'];
+      return out;
+    }
+    var d=top.d;
+    out.title=d.q; out.ref={pid:d.pid,n:d.n,id:d.id};
+    var bs=d.b.map(function(x){var t=x.toLowerCase(),sc=0;qt.forEach(function(q){if(t.indexOf(q)>-1)sc++});return {x:x,sc:sc}});
+    bs.sort(function(a,b){return b.sc-a.sc});
+    var pick=bs.filter(function(x){return x.sc>0}).slice(0,5);
+    if(!pick.length)pick=bs.slice(0,4);
+    out.lines=pick.map(function(x){return x.x});
+    if(d.w)out.lines.unshift(d.w);
+    return out;
+  }
+  var alog=document.getElementById('asklog');
+  function askRender(text){
+    if(!alog)return;
+    var me=document.createElement('div');me.className='msg me';me.textContent=text;alog.appendChild(me);
+    var a=ask(text);
+    var ai=document.createElement('div');ai.className='msg ai';
+    var h='<div class="mh">'+aesc(a.title)+'</div>';
+    if(a.lines.length)h+='<ul>'+a.lines.map(function(l){return '<li>'+aesc(l)+'</li>'}).join('')+'</ul>';
+    if(a.term){var g=DEFS[a.term];h+='<div class="gdef"><b>'+aesc(a.term)+'</b> &mdash; '+aesc(String(g).split('|')[0])+'</div>';}
+    if(a.ref)h+='<a class="full" href="#'+a.ref.id+'">Open the full answer &rarr;</a>';
+    ai.innerHTML=h;alog.appendChild(ai);
+    me.scrollIntoView({block:'start'});
+  }
+  var askIn=document.getElementById('askq'),askGo=document.getElementById('askgo');
+  function askSend(){var v=(askIn.value||'').trim();if(!v)return;askIn.value='';askRender(v);}
+  if(askGo)askGo.addEventListener('click',askSend);
+  if(askIn)askIn.addEventListener('keydown',function(e){if(e.key==='Enter'){e.preventDefault();askSend()}});
+  document.querySelectorAll('[data-ask]').forEach(function(b){b.addEventListener('click',function(){askRender(b.dataset.ask)})});
+  ['ask-home','ask-link'].forEach(function(id){var b=document.getElementById(id);
+    if(b)b.addEventListener('click',function(){show('ask');var i=document.getElementById('askq');if(i)i.focus();});});
 
 /* ===== display toggles ===== */
 var bT=document.getElementById('btn-theme'),bF=document.getElementById('btn-fit'),bR=document.getElementById('btn-read'),xR=document.getElementById('readexit');
