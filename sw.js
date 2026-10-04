@@ -1,7 +1,7 @@
 /* MSK Exam Prep service worker - cache-first, offline after first visit.
    When you update index.html, bump the version below (v1 -> v2 -> v3 ...)
    so every user's phone fetches the new version. */
-var CACHE = 'mskprep-v12';
+var CACHE = 'mskprep-v13';
 var ASSETS = ['./', './index.html', './manifest.webmanifest', './icon-192.png', './icon-512.png'];
 
 self.addEventListener('install', function (e) {
