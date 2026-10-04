@@ -108,6 +108,17 @@ body.reading .wrap,body.reading .foot{padding-bottom:70px}
 [hidden]{display:none!important}
 .view{display:none}
 .view.on{display:block}
+.asklog{margin:10px 0 4px}
+.msg{max-width:94%;padding:9px 12px;border-radius:12px;margin:8px 0;font-size:14.5px;line-height:1.55}
+.msg.me{margin-left:auto;background:var(--accent);color:#fff}
+.msg.ai{background:var(--card);border:1px solid var(--line)}
+.msg .mh{font-weight:600;margin-bottom:4px}
+.msg ul{margin:4px 0 0;padding-left:18px}
+.msg li{margin:3px 0}
+.msg .gdef{margin-top:6px;font-size:13.5px;color:var(--dim);border-top:1px dashed var(--line);padding-top:6px}
+.msg .full{margin-top:7px;display:inline-block}
+.askrow{display:flex;gap:8px;align-items:center;margin-top:10px}
+.askrow .input{margin:0}
 @media(max-width:420px){.qt{font-size:14.5px}li{font-size:14.5px}}
 </style>
 </head>
@@ -303,6 +314,24 @@ body.reading .wrap,body.reading .foot{padding-bottom:70px}
     <input class="input" id="q" type="search" placeholder="Find a word or topic&hellip;" autocomplete="off">
     <div class="dim" id="qmeta">Type to search all 16 papers.</div>
     <div id="results"></div>
+  </section>
+
+  <section class="view" id="v-ask">
+    <h1>Ask</h1>
+    <p class="lead">Ask about any topic and I will find it in the notes. Works offline &mdash; no account, no key.</p>
+    <div class="chips" id="askchips">
+      <button class="chip" data-ask="frozen shoulder">frozen shoulder</button>
+      <button class="chip" data-ask="NMES parameters">NMES parameters</button>
+      <button class="chip" data-ask="p-value interpretation">p-value</button>
+      <button class="chip" data-ask="Cobb angle scoliosis">Cobb angle</button>
+      <button class="chip" data-ask="gate control theory of pain">gate control</button>
+      <button class="chip" data-ask="McKenzie centralisation">centralisation</button>
+    </div>
+    <div id="asklog" class="asklog"></div>
+    <div class="askrow">
+      <input class="input" id="askq" type="search" placeholder="e.g. what does the examiner want on frozen shoulder?" autocomplete="off">
+      <button class="btn" id="askgo" type="button">Ask</button>
+    </div>
   </section>
 
   <section class="view" id="v-gloss">
@@ -895,12 +924,13 @@ body.reading .wrap,body.reading .foot{padding-bottom:70px}
   <a href="https://fysioin.github.io/PAPER3NOTES/">Paper 3 notes</a>
   <a href="https://fysioin.github.io/MSK-NOTES/">MSK notes</a>
   <a href="https://fysioin.github.io/msk-prep/">Exam prep app</a>
-  <div class="fn">By fysioin &middot; always free &middot; v2 minimal</div>
+  <div class="fn">By fysioin &middot; always free &middot; v3 &middot; ask</div>
 </footer>
 
 <nav class="nav" aria-label="Primary">
   <button data-v="papers" class="on"><svg viewBox="0 0 24 24"><path d="M4 5h16M4 12h16M4 19h10"/></svg>Papers</button>
   <button data-v="search"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.6-3.6"/></svg>Search</button>
+  <button data-v="ask"><svg viewBox="0 0 24 24"><path d="M4 5h16v11H9l-5 4z"/><path d="M8.5 10.5h7M8.5 13h4"/></svg>Ask</button>
   <button data-v="gloss"><svg viewBox="0 0 24 24"><path d="M5 4h14v16H5z"/><path d="M9 8h6M9 12h6"/></svg>Glossary</button>
   <button data-v="about"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 7.5v.5"/></svg>About</button>
 </nav>
@@ -1035,6 +1065,81 @@ body.reading .wrap,body.reading .foot{padding-bottom:70px}
     document.querySelectorAll('#glist .g').forEach(function(it){
       it.hidden=!!(s&&it.textContent.toLowerCase().indexOf(s)<0)});
   });
+
+  /* ---------- Ask: offline retrieval over the notes ---------- */
+  var CORP=[],DF={},AVG=1,NC=0;
+  var STOP={a:1,an:1,the:1,of:1,is:1,are:1,and:1,or:1,to:1,in:1,on:1,for:1,with:1,what:1,which:1,how:1,why:1,when:1,who:1,does:1,do:1,can:1,my:1,me:1,i:1,it:1,its:1,as:1,at:1,by:1,be:1,from:1,that:1,this:1,these:1,those:1,about:1,into:1,not:1,but:1,if:1,then:1,than:1,so:1,up:1,out:1,we:1,you:1,they:1,he:1,she:1,will:1,would:1,should:1,could:1,explain:1,define:1,tell:1,give:1,write:1,describe:1,discuss:1,list:1,mention:1,want:1,wants:1,examiner:1};
+  function tok(s){return (String(s).toLowerCase().match(/[a-z0-9]+/g)||[]).filter(function(t){return t.length>2&&!STOP[t]})}
+  function buildCorpus(){
+    CORP=[];
+    document.querySelectorAll('#pcontent article.q').forEach(function(el){
+      var m=(el.id||'').match(/^(.+)-q([0-9]+)$/);
+      function g(sel){var x=el.querySelector(sel);return x?x.textContent:''}
+      var ul=el.querySelector('ul');
+      var b=ul?[].map.call(ul.querySelectorAll('li'),function(li){return li.textContent}):[];
+      CORP.push({id:el.id,pid:m?m[1]:'',n:m?+m[2]:0,q:g('.qt'),w:g('.want'),h:g('.hook'),b:b,
+        text:[g('.qt'),g('.want'),b.join(' '),g('.hook')].join(' ')});
+    });
+    DF={};
+    CORP.forEach(function(d){d.tf={};tok(d.text).forEach(function(t){d.tf[t]=(d.tf[t]||0)+1});
+      Object.keys(d.tf).forEach(function(t){DF[t]=(DF[t]||0)+1})});
+    NC=CORP.length; var tot=0;
+    CORP.forEach(function(d){Object.keys(d.tf).forEach(function(t){tot+=d.tf[t]})});
+    AVG=NC?tot/NC:1;
+  }
+  function bm25(qt,d){
+    var k1=1.5,b=0.75,s=0,dl=0; Object.keys(d.tf).forEach(function(t){dl+=d.tf[t]});
+    qt.forEach(function(t){ if(!d.tf[t])return;
+      var idf=Math.log(1+(NC-DF[t]+0.5)/(DF[t]+0.5));
+      s+=idf*(d.tf[t]*(k1+1))/(d.tf[t]+k1*(1-b+b*dl/AVG));
+    });
+    var ql=d.q.toLowerCase(); qt.forEach(function(t){ if(ql.indexOf(t)>-1)s+=1.0; });
+    return s;
+  }
+  function findTerm(text){
+    var low=text.toLowerCase(),hit=null;
+    Object.keys(GLOSS).forEach(function(k){var d=GLOSS[k].d;
+      if(!hit&&d.length>3&&low.indexOf(d.toLowerCase())>-1)hit=k;});
+    return hit;
+  }
+  function ask(text){
+    if(!CORP.length)buildCorpus();
+    var qt=tok(text),out={title:'',lines:[],ref:null,term:findTerm(text)};
+    var ranked=CORP.map(function(d){return {d:d,s:bm25(qt,d)}}).sort(function(a,b){return b.s-a.s});
+    var top=ranked[0];
+    if(!qt.length||!top||top.s<1){
+      out.title='I could not find that in the notes.';
+      out.lines=['Try a topic word — for example “frozen shoulder”, “NMES”, “p-value”, “Cobb angle”, “gate control”.'];
+      return out;
+    }
+    var d=top.d;
+    out.title=d.q; out.ref={pid:d.pid,n:d.n,id:d.id};
+    var bs=d.b.map(function(x){var t=x.toLowerCase(),sc=0;qt.forEach(function(q){if(t.indexOf(q)>-1)sc++});return {x:x,sc:sc}});
+    bs.sort(function(a,b){return b.sc-a.sc});
+    var pick=bs.filter(function(x){return x.sc>0}).slice(0,5);
+    if(!pick.length)pick=bs.slice(0,4);
+    out.lines=pick.map(function(x){return x.x});
+    if(d.w)out.lines.unshift(d.w);
+    return out;
+  }
+  var alog=document.getElementById('asklog');
+  function askRender(text){
+    if(!alog)return;
+    var me=document.createElement('div');me.className='msg me';me.textContent=text;alog.appendChild(me);
+    var a=ask(text);
+    var ai=document.createElement('div');ai.className='msg ai';
+    var h='<div class="mh">'+esc(a.title)+'</div>';
+    if(a.lines.length)h+='<ul>'+a.lines.map(function(l){return '<li>'+esc(l)+'</li>'}).join('')+'</ul>';
+    if(a.term){var g=GLOSS[a.term];h+='<div class="gdef"><b>'+esc(g.d)+'</b> &mdash; '+esc(g.m)+'</div>';}
+    if(a.ref)h+='<a class="full" href="#'+a.ref.id+'">Open the full answer &rarr;</a>';
+    ai.innerHTML=h;alog.appendChild(ai);
+    me.scrollIntoView({block:'start'});
+  }
+  var askIn=document.getElementById('askq'),askGo=document.getElementById('askgo');
+  function askSend(){var v=(askIn.value||'').trim();if(!v)return;askIn.value='';askRender(v);}
+  if(askGo)askGo.addEventListener('click',askSend);
+  if(askIn)askIn.addEventListener('keydown',function(e){if(e.key==='Enter'){e.preventDefault();askSend()}});
+  document.querySelectorAll('[data-ask]').forEach(function(b){b.addEventListener('click',function(){askRender(b.dataset.ask)})});
 
   /* theme + reading */
   var bt=document.getElementById('btn-theme');
