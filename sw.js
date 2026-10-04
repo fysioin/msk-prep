@@ -2,7 +2,7 @@
    Pages (HTML) are NETWORK-FIRST so edits show up on the next load;
    static assets stay cache-first so the app still works offline.
    Bump CACHE when you change this file. */
-var CACHE = 'mskprep-v20';
+var CACHE = 'mskprep-v21';
 var ASSETS = ['./manifest.webmanifest', './icon-192.png', './icon-512.png'];
 
 self.addEventListener('install', function (e) {
