@@ -1,56 +1,76 @@
-/* MSK Exam Prep service worker.
-   Pages (HTML) are NETWORK-FIRST so edits show up on the next load;
-   static assets stay cache-first so the app still works offline.
-   Bump CACHE when you change this file. */
-var CACHE = 'mskprep-v23';
-var ASSETS = ['./manifest.webmanifest', './icon-192.png', './icon-512.png'];
+/* RGUHS MSK Exam Prep - offline service worker.
+   Strategy: all pages are PRECACHED so every internal link opens with no network.
+   Navigations are network-first (fresh when online, cache when offline); static
+   assets and cross-origin files are cache-first. Bump CACHE when you change this. */
+var CACHE = 'mskprep-v1';
+var CORE = [
+  "./icon-192.png",
+  "./icon-512.png",
+  "./index.html",
+  "./manifest.json",
+  "./simplified-companion.html",
+  "./sw.js"
+];
+var EXTRA = [];
 
 self.addEventListener('install', function (e) {
   self.skipWaiting();
-  e.waitUntil(caches.open(CACHE).then(function (c) { return c.addAll(ASSETS); }));
+  e.waitUntil(caches.open(CACHE).then(function (c) {
+    return Promise.all(CORE.map(function (u) {
+      return c.add(new Request(u, { cache: 'reload' })).catch(function () {});
+    }));
+  }));
 });
 
 self.addEventListener('activate', function (e) {
   e.waitUntil(
-    caches.keys()
-      .then(function (keys) {
-        return Promise.all(keys.filter(function (k) { return k !== CACHE; })
-                                .map(function (k) { return caches.delete(k); }));
-      })
-      .then(function () { return self.clients.claim(); })
+    caches.keys().then(function (keys) {
+      return Promise.all(keys.filter(function (k) { return k !== CACHE; })
+                              .map(function (k) { return caches.delete(k); }));
+    }).then(function () { return self.clients.claim(); })
   );
+  if (EXTRA.length) {
+    e.waitUntil(caches.open(CACHE).then(function (c) {
+      return Promise.all(EXTRA.map(function (u) {
+        return c.match(u).then(function (hit) {
+          if (hit) return;
+          return c.add(u).catch(function () {});
+        });
+      }));
+    }));
+  }
 });
 
 self.addEventListener('fetch', function (e) {
   var req = e.request;
   if (req.method !== 'GET') return;
 
-  var isPage = req.mode === 'navigate' || req.destination === 'document';
-  if (isPage) {
-    /* network-first: always try the server, fall back to cache when offline */
+  var isDoc = req.mode === 'navigate' || req.destination === 'document';
+  if (isDoc) {
     e.respondWith(
       fetch(req).then(function (resp) {
         var copy = resp.clone();
         caches.open(CACHE).then(function (c) { c.put(req, copy); });
         return resp;
       }).catch(function () {
-        return caches.match(req).then(function (hit) { return hit || caches.match('./'); });
+        return caches.match(req, { ignoreSearch: true }).then(function (hit) {
+          return hit || caches.match('./index.html') || caches.match('./');
+        });
       })
     );
     return;
   }
 
-  /* cache-first for images / manifest */
   e.respondWith(
     caches.match(req, { ignoreSearch: true }).then(function (hit) {
       if (hit) return hit;
       return fetch(req).then(function (resp) {
-        if (resp && resp.ok && req.url.indexOf(location.origin) === 0) {
+        if (resp && (resp.ok || resp.type === 'opaque')) {
           var copy = resp.clone();
           caches.open(CACHE).then(function (c) { c.put(req, copy); });
         }
         return resp;
-      });
+      }).catch(function () { return hit; });
     })
   );
 });
