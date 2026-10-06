@@ -130,6 +130,7 @@ html.dark .rg-fab{color:#052622;}
 table,td{color:var(--ink)!important;}
 .stars .dim,.stars-sm .dim{color:var(--muted)!important;opacity:.55;}
 @media (max-width:520px){.rg-toolbar{gap:6px;padding:8px 12px;}.rg-toolbar .lbl{display:none;}}
+.abar-actions{display:none!important;}
 @media print{.rg-toolbar,#rg-popup,.rg-fab,.rg-drawer,.rg-scrim{display:none!important;}}
 </style></head>
 <body><div aria-label="Study tools" class="rg-toolbar" role="toolbar">
@@ -141,7 +142,8 @@ table,td{color:var(--ink)!important;}
 <button class="btn" id="rgClearAll">Clear all</button>
 <span class="sep"></span>
 <button class="btn active" id="rgToggleNotes">Term notes</button>
-<button class="btn" id="rgToggleTheme">Night mode</button>
+<button class="btn" id="rgToggleRead" title="Reading mode - bigger text, hide navigation">Reading</button>
+  <button class="btn" id="rgToggleTheme">Night mode</button>
 <button class="btn" id="rgToggleFit">Fit to screen</button>
 <span class="hint">Select text, then pick a colour. Notes save automatically.</span>
 </div>
@@ -223,6 +225,8 @@ table,td{color:var(--ink)!important;}
   if(note){var nk=KEY+'-note-'+location.pathname;
     try{var v=localStorage.getItem(nk);if(v)note.value=v;}catch(e){}
     note.addEventListener('input',function(){try{localStorage.setItem(nk,note.value);}catch(e){}});}
+  var rb=document.getElementById('rgToggleRead');
+  if(rb)rb.addEventListener('click',function(){var t=document.getElementById('btn-read');if(t){t.click();rb.classList.toggle('active',t.getAttribute('aria-pressed')==='true');}});
 })();
 </script></body>
 </html>
